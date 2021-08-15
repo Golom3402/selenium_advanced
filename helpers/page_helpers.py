@@ -19,3 +19,19 @@ class AuthPage:
         passwd_field.send_keys(f'{passwd}' if passwd else 'admin')
         submit_btn = self.driver.find_element(*lctrs.login_button_submit)
         submit_btn.click()
+
+class AdminPage:
+
+    def __init__(self, driver):
+        self.driver = driver
+
+    def get_all_sidebar_menu_item_elements(self):
+        elements = self.driver.find_elements(*lctrs.sidebar_menu_main_items)
+        return elements
+
+    def get_all_sidebar_menu_sub_elements(self):
+        sub_elements = self.driver.find_elements(*lctrs.sidebar_menu_sub_items)
+        return sub_elements
+
+
+
