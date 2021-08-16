@@ -34,4 +34,3 @@ class AdminPage:
         return sub_elements
 
 
-
