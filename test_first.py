@@ -1,6 +1,7 @@
 import pytest
 from selenium.webdriver.support import wait
 from helpers.app import Application
+from helpers.page_helpers import check_sort
 from locators import CommonLocators as lctrs
 
 
@@ -49,3 +50,19 @@ def test_for_8_labor(app):
         label_count = test_img.find_elements(*lctrs.sticker_line_for_img)
         assert len(label_count) == 1, f"В товаре {test_img.get_attribute('title')} на главной странице нашли " \
                                       f"{len(label_count)} стикеров, а ожидали найти 1 стикер"
+
+def test_for_9(app):
+    app.driver.get('http://localhost/litecart/admin/?app=countries&doc=countries')
+    app.auth.login_as('admin', 'admin')
+    top_level_names = app.country.read_all_country_on_page()
+    assert check_sort(top_level_names), "названия стран не отсортированы по имени"
+    zones_elements = app.driver.find_elements(*lctrs.country_page_zones_count)
+    for i in range(len(zones_elements)):
+        elements = app.driver.find_elements(*lctrs.country_page_zones_count)
+        current_zones_count = elements[i].text
+        if int(current_zones_count) > 0:
+            app.driver.find_elements(*lctrs.country_page_country_name)[i].click()
+            inner_zones_names = app.country.read_all_country_on_page(page='inner')
+            assert check_sort(inner_zones_names), 'названия зон в на странице редактирования страны' \
+                                                  ' не отсортированы по имени'
+            app.driver.back()

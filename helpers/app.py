@@ -1,7 +1,7 @@
 import os
 
 from selenium import webdriver
-from helpers.page_helpers import AuthPage, AdminPage
+from helpers.page_helpers import AuthPage, AdminPage, CountryPage
 
 
 class Application:
@@ -21,3 +21,4 @@ class Application:
 
         self.admin = AdminPage(self.driver)
         self.auth = AuthPage(self.driver)
+        self.country = CountryPage(self.driver)

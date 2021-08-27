@@ -10,3 +10,6 @@ class CommonLocators:
     sidebar_menu_sub_items = By.XPATH, "//*[@class='selected']/ul//a"
     sticker_line_for_img = By.XPATH, ".//*[contains(@class,'sticker')]"
     img_on_main_page = By.XPATH, "//li/a[@class='link']"
+    country_page_zones_count = By.XPATH, "//tr[@class='row']/td[6]"
+    country_page_country_name = By.XPATH, "//td/a[text()]"
+    country_name_on_edit_country_page = By.XPATH, "//td[text()]/*[contains(@name, '[name]')]/.."
